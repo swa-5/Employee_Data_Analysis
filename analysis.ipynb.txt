@@ -1,0 +1,139 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "4380a624",
+   "metadata": {
+    "vscode": {
+     "languageId": "plaintext"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "# importing libraries\n",
+    "import pandas as pd\n",
+    "import matplotlib.pyplot as plt "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "a63e1f89",
+   "metadata": {
+    "vscode": {
+     "languageId": "plaintext"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "# Loading Data\n",
+    "df = pd.read_csv(\"employees.csv\")\n",
+    "df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "1a2ef47b",
+   "metadata": {
+    "vscode": {
+     "languageId": "plaintext"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "# Average salary\n",
+    "df[\"salary\"].mean()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "a3e4d0fc",
+   "metadata": {
+    "vscode": {
+     "languageId": "plaintext"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "# Average salary per department\n",
+    "avg_salary = df.groupby(\"dept_id\", as_index=False)[\"salary\"].mean()\n",
+    "avg_salary"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "d2137fc7",
+   "metadata": {
+    "vscode": {
+     "languageId": "plaintext"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "# Employees per department\n",
+    "emp_count = df.groupby(\"dept_id\")[\"id\"].count()\n",
+    "emp_count"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "23907b86",
+   "metadata": {
+    "vscode": {
+     "languageId": "plaintext"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "# Visualization — Average Salary\n",
+    "avg_salary.plot(kind=\"bar\", x=\"dept_id\", y=\"salary\")\n",
+    "plt.title(\"Average Salary by Department\")\n",
+    "plt.xlabel(\"Department ID\")\n",
+    "plt.ylabel(\"Average Salary\")\n",
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "153c3d1c",
+   "metadata": {
+    "vscode": {
+     "languageId": "plaintext"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "# Visualization — Employee Count\n",
+    "emp_count.plot(kind=\"bar\")\n",
+    "plt.title(\"Number of Employees per Department\")\n",
+    "plt.xlabel(\"Department ID\")\n",
+    "plt.ylabel(\"Number of Employees\")\n",
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "fd1038fb",
+   "metadata": {},
+   "source": [
+    "Insights:\n",
+    "- Department 2 has the highest average salary.\n",
+    "- Department 1 has fewer employees compared to others.\n",
+    "- Salary distribution indicates higher cost concentration in Department 2."
+   ]
+  }
+ ],
+ "metadata": {
+  "language_info": {
+   "name": "python"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
